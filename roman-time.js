@@ -2,12 +2,9 @@
 
 function ConvertTime(order, time) {
     if (time == 0)
-        order.push([zero]);
+        return [zero, []];
     else
-    {
-        order.push(secondDigit[parseInt(time / 10)]);
-        order.push(firstDigit[time % 10]);
-    }
+        return [secondDigit[parseInt(time / 10)], firstDigit[time % 10]] 
 }
 
 var hours = process.argv[2];
@@ -22,15 +19,21 @@ var firstDigit = [[], [one], [one, one], [one, one, one], [one, five], [five],
 				  [five, one], [five, one, one], [five, one, one, one], [one, ten]];
 var secondDigit = [[], [ten], [ten, ten], [ten, ten, ten], [ten, fifty], [fifty]];
 var order = [];
+var amountOfLines = 7;
 if (hours > 23 || hours < 0 || minutes > 59 || minutes < 0)
 	console.log('Время указано неверно');
 else
 {
-    ConvertTime(order, hours);
+    var romanNumbers = ConvertTime(order, hours);
+    order.push(romanNumbers[0]);
+    order.push(romanNumbers[1]);
     order.push([colon]);
-    ConvertTime(order, minutes);
+    romanNumbers = ConvertTime(order, minutes);
+    order.push(romanNumbers[0]);
+    order.push(romanNumbers[1]);
+    var line;
 
-	for (line=0; line<7; line++)
+	for (line=0; line<amountOfLines; line++)
 	{
 		var res = "";
 		for(digit = 0; digit< order.length; digit++)
