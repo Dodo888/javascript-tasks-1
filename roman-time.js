@@ -2,7 +2,7 @@
 
 function ConvertTime(order, time) {
     if (time == 0)
-        return [zero, []];
+        return [[zero], []];
     else
         return [secondDigit[parseInt(time / 10)], firstDigit[time % 10]] 
 }
